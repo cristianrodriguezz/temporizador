@@ -1,20 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
-import './App.css'
+import Hamster from './components/Hamster'
+import HamsterSinAnimate from './components/HamsterSinAnimate';
 
-
-function App() {
-  const [minutes, setMinutes] = useState(1);
+const App = () => {
   const [seconds, setSeconds] = useState(30);
+  const [minutes, setMinutes] = useState(1);
+  const [intervalId, setIntervalId] = useState(0);
   const [isRestart, setIsRestart] = useState(false);
-  const ref = useRef();
 
-useEffect(() => {
-  const timer = setInterval(() => 
-      setSeconds(prevCount => prevCount - 1)
+  const handlePause = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(0);
+      return;
+    }
+    const newIntervalId = setInterval(() => {
+      setSeconds(prevCount => prevCount - 1);
 
-  ,1000);
+    }, 100);
+    setIntervalId(newIntervalId);
+  };
+  const handleRestart = () => {
+    setMinutes(1)
+    setSeconds(30)
+    setIsRestart(!isRestart)
+  }
 
-   if (seconds === 0 && minutes === 0){
+  useEffect(() => {
+    if (seconds === 0 && minutes === 0){
       setSeconds(30)
       setMinutes(1)
       setIsRestart(!isRestart)
@@ -22,15 +35,24 @@ useEffect(() => {
       setSeconds(59)
       setMinutes(0)
   }
-  return () => clearInterval(timer);
 
-}, [seconds]);
+  }, [seconds])
+  
 
-return (
-  <div ref={ref} className="timer" style={isRestart ? {backgroundColor:"red", width:"100%", height:"100vh"} :{ backgroundColor:"green", width:"100%", height:"100vh"}}>
-      {minutes}:{seconds}
-  </div>
-);
+  return (
+    <div className="timer" style={isRestart ? {backgroundColor:"blue", width:"100%", height:"100vh"} :{ backgroundColor:"green", width:"100%", height:"100vh"}}>
+      {intervalId ?  <Hamster/> : <HamsterSinAnimate/> }
+      <h1>{minutes}:{seconds}</h1>
+      <div >
+        <button class="button" onClick={handlePause}>
+          {intervalId ? "PAUSA" : "REAUNDAR"}
+        </button>
+        <button class="button" onClick={handleRestart}>
+          RESTART
+        </button>
+      </div>
+    </div>
+  );
 };
 
-export default App
+export default App;
