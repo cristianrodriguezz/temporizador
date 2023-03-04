@@ -3,6 +3,7 @@ import Hamster from './components/Hamster'
 import HamsterSinAnimate from './components/HamsterSinAnimate';
 import SoundAt15Seconds from './components/SoundAt15Seconds';
 import SoundsRandmon from './components/SoundsRandmon';
+import SoundAtPass from './components/SoundAtPass';
 
 const App = () => {
   const [seconds, setSeconds] = useState(30);
@@ -12,6 +13,7 @@ const App = () => {
   const [cero, setCero] = useState(false);
   const [sound, setSound] = useState(false);
   const [soundAt15seconds, setSoundAt15seconds] = useState(false);
+  const [soundAtPass, setSoundAtPass] = useState(false);
  
   const handlePause = () => {
     if (intervalId) {
@@ -29,6 +31,10 @@ const App = () => {
     setMinutes(1)
     setSeconds(30)
     setIsRestart(!isRestart)
+    setSoundAtPass(true)
+    setTimeout(() => {
+      setSoundAtPass(false)
+    }, 1000);
   }
 
   useEffect(() => {
@@ -58,7 +64,7 @@ const App = () => {
       }, 5000);
     }
 
-  }, [seconds])
+  }, [seconds, soundAtPass])
   
 
   return (
@@ -89,6 +95,12 @@ const App = () => {
       {
         soundAt15seconds ?
         <SoundAt15Seconds/>
+        :
+        <div></div>
+      }
+      {
+        soundAtPass ?
+        <SoundAtPass/>
         :
         <div></div>
       }
