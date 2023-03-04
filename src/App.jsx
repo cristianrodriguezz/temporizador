@@ -7,6 +7,7 @@ const App = () => {
   const [minutes, setMinutes] = useState(1);
   const [intervalId, setIntervalId] = useState(0);
   const [isRestart, setIsRestart] = useState(false);
+  const [cero, setCero] = useState(false);
 
   const handlePause = () => {
     if (intervalId) {
@@ -35,6 +36,11 @@ const App = () => {
       setSeconds(59)
       setMinutes(0)
   }
+    if(seconds <= 9 ){
+      setCero(true)
+    }else{
+      setCero(false)
+    }
 
   }, [seconds])
   
@@ -42,7 +48,14 @@ const App = () => {
   return (
     <div className="timer" style={isRestart ? {backgroundColor:"blue", width:"100%", height:"100vh"} :{ backgroundColor:"green", width:"100%", height:"100vh"}}>
       {intervalId ?  <Hamster/> : <HamsterSinAnimate/> }
-      <h1>{minutes}:{seconds}</h1>
+      {
+        cero 
+        ?
+        <h1>{minutes}:0{seconds}</h1>
+        :
+        <h1>{minutes}:{seconds}</h1>
+      }
+
       <div >
         <button class="button" onClick={handlePause}>
           {intervalId ? "PAUSA" : "REAUNDAR"}
