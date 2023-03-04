@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Hamster from './components/Hamster'
 import HamsterSinAnimate from './components/HamsterSinAnimate';
+import SoundAt15Seconds from './components/SoundAt15Seconds';
 import SoundsRandmon from './components/SoundsRandmon';
 
 const App = () => {
@@ -10,7 +11,8 @@ const App = () => {
   const [isRestart, setIsRestart] = useState(false);
   const [cero, setCero] = useState(false);
   const [sound, setSound] = useState(false);
-
+  const [soundAt15seconds, setSoundAt15seconds] = useState(false);
+ 
   const handlePause = () => {
     if (intervalId) {
       clearInterval(intervalId);
@@ -20,7 +22,7 @@ const App = () => {
     const newIntervalId = setInterval(() => {
       setSeconds(prevCount => prevCount - 1);
 
-    }, 1000);
+    }, 100);
     setIntervalId(newIntervalId);
   };
   const handleRestart = () => {
@@ -34,21 +36,26 @@ const App = () => {
       setSeconds(30)
       setMinutes(1)
       setIsRestart(!isRestart)
-  } else if (seconds === 0){
+    } else if (seconds === 0){
       setSeconds(59)
       setMinutes(0)
-  }
+    }
     if(seconds <= 9 ){
       setCero(true)
-    }else{
+    } else {
       setCero(false)
     }
     if (seconds === 0 && minutes === 0){
-      setSound(!sound)
+      setSound(true)
       setTimeout(() => {
         setSound(false)
       }, 5000);
-      
+    }
+    if (seconds === 12 && minutes === 0){
+      setSoundAt15seconds(true)
+      setTimeout(() => {
+        setSoundAt15seconds(false)
+      }, 5000);
     }
 
   }, [seconds])
@@ -76,6 +83,12 @@ const App = () => {
       {
         sound ?
         <SoundsRandmon/>
+        :
+        <div></div>
+      }
+      {
+        soundAt15seconds ?
+        <SoundAt15Seconds/>
         :
         <div></div>
       }

@@ -1,8 +1,7 @@
 import React from 'react'
-import sound from '../sound/13.mp3'
+import sound from '../sound/16.mp3'
 
-const SoundsRandmon = () => {
-
+const SoundAt15Seconds = () => {
   return (
     <div>
         <audio src={sound} autoPlay></audio>
@@ -10,4 +9,4 @@ const SoundsRandmon = () => {
   )
 }
 
-export default SoundsRandmon
+export default SoundAt15Seconds
