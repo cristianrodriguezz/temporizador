@@ -22,7 +22,7 @@ const App = () => {
     const newIntervalId = setInterval(() => {
       setSeconds(prevCount => prevCount - 1);
 
-    }, 100);
+    }, 1000);
     setIntervalId(newIntervalId);
   };
   const handleRestart = () => {
