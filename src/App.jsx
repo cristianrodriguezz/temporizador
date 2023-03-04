@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Hamster from './components/Hamster'
 import HamsterSinAnimate from './components/HamsterSinAnimate';
+import SoundsRandmon from './components/SoundsRandmon';
 
 const App = () => {
   const [seconds, setSeconds] = useState(30);
@@ -8,6 +9,7 @@ const App = () => {
   const [intervalId, setIntervalId] = useState(0);
   const [isRestart, setIsRestart] = useState(false);
   const [cero, setCero] = useState(false);
+  const [sound, setSound] = useState(false);
 
   const handlePause = () => {
     if (intervalId) {
@@ -18,7 +20,7 @@ const App = () => {
     const newIntervalId = setInterval(() => {
       setSeconds(prevCount => prevCount - 1);
 
-    }, 1000);
+    }, 100);
     setIntervalId(newIntervalId);
   };
   const handleRestart = () => {
@@ -41,21 +43,28 @@ const App = () => {
     }else{
       setCero(false)
     }
+    if (seconds === 0 && minutes === 0){
+      setSound(!sound)
+      setTimeout(() => {
+        setSound(false)
+      }, 5000);
+      
+    }
 
   }, [seconds])
   
 
   return (
     <div className="timer" style={isRestart ? {backgroundColor:"blue", width:"100%", height:"100vh"} :{ backgroundColor:"green", width:"100%", height:"100vh"}}>
+      
       {intervalId ?  <Hamster/> : <HamsterSinAnimate/> }
-      {
-        cero 
+      {cero  
         ?
-        <h1>{minutes}:0{seconds}</h1>
-        :
+       <h1>{minutes}:0{seconds}</h1> 
+       : 
         <h1>{minutes}:{seconds}</h1>
       }
-
+      
       <div >
         <button class="button" onClick={handlePause}>
           {intervalId ? "PAUSA" : "REAUNDAR"}
@@ -64,6 +73,13 @@ const App = () => {
           RESTART
         </button>
       </div>
+      {
+        sound ?
+        <SoundsRandmon/>
+        :
+        <div></div>
+      }
+      
     </div>
   );
 };
