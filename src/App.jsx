@@ -51,13 +51,13 @@ const App = () => {
     } else {
       setCero(false)
     }
-    if (seconds === 0 && minutes === 0){
+    if (seconds === 1 && minutes === 0){
       setSound(true)
       setTimeout(() => {
         setSound(false)
       }, 5000);
     }
-    if (seconds === 12 && minutes === 0){
+    if (seconds === 14 && minutes === 0){
       setSoundAt15seconds(true)
       setTimeout(() => {
         setSoundAt15seconds(false)
