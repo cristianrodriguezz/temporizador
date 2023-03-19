@@ -39,6 +39,7 @@
  box-shadow: 0px 6px 0px #d35400;
  transition: all .1s;
  width: 120px;
+ height: 160px;
  margin-left: 10px;
 }
 
@@ -52,7 +53,7 @@
   box-shadow: 0px 6px 0px #d35400;
   transition: all .1s;
   width: 210px;
-  height: 130px;
+  height: 160px;
   margin-left: 10px;
  }
 
