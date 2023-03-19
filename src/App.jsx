@@ -85,7 +85,7 @@ const App = () => {
         <button class="button" onClick={handlePause}>
           {intervalId ? "PAUSA" : "REAUNDAR"}
         </button>
-        <button class="button" onClick={handleRestart}>
+        <button class="buttonRestart" onClick={handleRestart} >
           RESTART
         </button>
       </div>
