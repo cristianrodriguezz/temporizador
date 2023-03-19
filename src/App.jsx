@@ -7,9 +7,9 @@ import SoundAtPass from "./components/SoundAtPass";
 import useSeconds from "./hooks/useSeconds.js";
 
 const App = () => {
-  const [inputSecond, setInputSecond] = useState();
 
-  const inputMinute = useRef();
+
+
   const {
     seconds,
     setIsRestart,
@@ -22,7 +22,7 @@ const App = () => {
     cero,
     setMinutes,
     setSeconds,
-  } = useSeconds({ inputSecond, inputMinute });
+  } = useSeconds();
 
   const [intervalId, setIntervalId] = useState(0);
 
@@ -61,25 +61,10 @@ const App = () => {
           : { backgroundColor: "red", width: "100%", height: "100vh" }
       }
     >
-      <label>
-        <h6>Selecciona los minutos</h6>
-        <input type="number" ref={inputMinute} />
-      </label>
-      <label>
-        <h6>Seleccioná los segundos</h6>
-        {inputSecond}
-        <input type="number" onChange={handleChange} />
-      </label>
       {intervalId ? <Hamster /> : <HamsterSinAnimate />}
-      {cero ? (
-        <h1>
-          {minutes}:0{seconds}
-        </h1>
-      ) : (
         <h1>
           {minutes}:{seconds}
         </h1>
-      )}
 
       <div>
         <button class="button" onClick={handlePause}>

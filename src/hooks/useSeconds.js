@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-function useSeconds({ second, minute }){
-    const [seconds, setSeconds] = useState(second);
-    const [minutes, setMinutes] = useState(minute);
+function useSeconds(){
+    const [seconds, setSeconds] = useState(30);
+    const [minutes, setMinutes] = useState(1);
     const [sound, setSound] = useState(false);
     const [soundAt15seconds, setSoundAt15seconds] = useState(false);
     const [soundAtPass, setSoundAtPass] = useState(false);
