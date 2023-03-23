@@ -63,7 +63,7 @@ const App = () => {
     >
       {intervalId ? <Hamster /> : <HamsterSinAnimate />}
         <h1>
-          {minutes}:{seconds}
+          {minutes}:{seconds < 10 ? "0" + seconds: seconds} 
         </h1>
 
       <div>
